@@ -24,7 +24,13 @@ for i in open(ip_filename):
 for i in open(port_filename):
 	#替换文件中的换行符
 	port_value=i.replace('\n','')
-	portlist.append(port_value)
+	port_pattern=re.match(r'((\d{1,5})-(\d{1,5}))',port_value)
+	if port_pattern:
+		port_value=port_value.split('-')
+		for j in range(int(port_value[0]),int(port_value[1])+1):
+			portlist.append(j)
+	else:
+		portlist.append(port_value)
 
 
 #线程模块--scoket
